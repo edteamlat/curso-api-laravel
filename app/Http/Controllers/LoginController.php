@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\User;
 use Illuminate\Http\Request;
+use App\Business\AbilitiesResolver;
 use Illuminate\Support\Facades\Hash;
 
 class LoginController extends Controller
@@ -14,7 +15,9 @@ class LoginController extends Controller
             ->first();
 
         if ($user && Hash::check(request('password'), $user->password)) {
-            $token = $user->createToken('login');
+            $abilities = AbilitiesResolver::resolve($user, request('device'));
+            // $abilities = $this->resolveAbilities($user, request('device'));
+            $token = $user->createToken('login', $abilities);
 
             return [
                 'token' => $token->plainTextToken,
@@ -25,4 +28,6 @@ class LoginController extends Controller
             'message' => 'Invalid credentials.',
         ], 401);
     }
+
+
 }
