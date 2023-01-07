@@ -9,6 +9,12 @@ class EstablishmentsController extends Controller
 {
     public function index()
     {
-        return Establishment::paginate(10);
+        return Establishment::when(request()->filled('category'), function ($query) {
+                $query->where('category', request('category'));
+            })
+            ->when(request()->exists('popular'), function ($query) {
+                $query->orderBy('stars', 'DESC');
+            })
+            ->paginate(10);
     }
 }
