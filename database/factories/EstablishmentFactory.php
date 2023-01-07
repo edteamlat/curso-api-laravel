@@ -2,6 +2,7 @@
 
 namespace Database\Factories;
 
+use Illuminate\Support\Arr;
 use Illuminate\Support\Str;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
@@ -23,6 +24,8 @@ class EstablishmentFactory extends Factory
             'phone' => $this->faker->phoneNumber(),
             'email' => $this->faker->safeEmail(),
             'logo' => 'logos/' . Str::random() . '.png',
+            'category' => Arr::random(['fast food', 'chinese food']),
+            'stars' => rand(100, 999),
         ];
     }
 }

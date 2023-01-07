@@ -20,6 +20,8 @@ return new class extends Migration
             $table->string('phone');
             $table->string('email');
             $table->string('logo');
+            $table->string('category');
+            $table->integer('stars');
             $table->timestamps();
         });
     }
