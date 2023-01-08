@@ -5,12 +5,12 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Establishment extends Model
+class Product extends Model
 {
     use HasFactory;
 
-    public function products()
+    public function establishment()
     {
-        return $this->hasMany(Product::class);
+        return $this->belongsTo(Establishment::class);
     }
 }

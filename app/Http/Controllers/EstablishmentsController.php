@@ -28,6 +28,8 @@ class EstablishmentsController extends Controller
     {
         abort_unless(Auth::user()->tokenCan('establishment:show'), 403, "You don't have permissions to perform this action.");
 
+        $establishment->load('products');
+
         return new EstablishmentResource($establishment);
     }
 }

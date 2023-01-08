@@ -2,9 +2,10 @@
 
 namespace Database\Seeders;
 
+use App\Models\Product;
 use App\Models\Establishment;
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
+use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 
 class EstablishmentSeeder extends Seeder
 {
@@ -15,6 +16,9 @@ class EstablishmentSeeder extends Seeder
      */
     public function run()
     {
-        Establishment::factory()->count(50)->create();
+        Establishment::factory()
+            ->has(Product::factory()->count(5))
+            ->count(50)
+            ->create();
     }
 }
