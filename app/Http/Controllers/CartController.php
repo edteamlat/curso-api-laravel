@@ -11,6 +11,8 @@ class CartController extends Controller
 {
     public function index()
     {
+        abort_unless(Auth::user()->tokenCan('cart:manage'), 403, "You don't have permissions to perform this action.");
+
         Cart::restore(Auth::user()->email);
         Cart::store(Auth::user()->email);
 
@@ -19,6 +21,12 @@ class CartController extends Controller
 
     public function store(Product $product)
     {
+        abort_unless(Auth::user()->tokenCan('cart:manage'), 403, "You don't have permissions to perform this action.");
+
+        request()->validate([
+            'qty' => 'required|integer',
+        ]);
+
         Cart::restore(Auth::user()->email);
 
         Cart::add([
@@ -36,6 +44,12 @@ class CartController extends Controller
 
     public function update($rowId)
     {
+        abort_unless(Auth::user()->tokenCan('cart:manage'), 403, "You don't have permissions to perform this action.");
+
+        request()->validate([
+            'qty' => 'required|integer',
+        ]);
+
         Cart::restore(Auth::user()->email);
 
         Cart::update($rowId, [
@@ -49,6 +63,8 @@ class CartController extends Controller
 
     public function destroy($rowId)
     {
+        abort_unless(Auth::user()->tokenCan('cart:manage'), 403, "You don't have permissions to perform this action.");
+
         Cart::restore(Auth::user()->email);
 
         Cart::remove($rowId);

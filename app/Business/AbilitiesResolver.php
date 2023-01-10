@@ -23,6 +23,7 @@ class AbilitiesResolver
                 'establishment:show',
                 'product:show',
                 'orders:create',
+                'cart:manage',
             ],
         };
     }
