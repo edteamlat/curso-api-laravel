@@ -8,8 +8,13 @@ use App\Http\Controllers\LoginController;
 use App\Http\Controllers\OrdersController;
 use App\Http\Controllers\ProductsController;
 use App\Http\Controllers\EstablishmentsController;
+use App\Http\Controllers\DeliveryAvailabilityController;
 
 Route::middleware('auth:sanctum')->group(function () {
+
+    Route::put('availability', [DeliveryAvailabilityController::class, 'update']);
+
+
 
     Route::get('establishments', [EstablishmentsController::class, 'index']);
     Route::get('establishments/{establishment}', [EstablishmentsController::class, 'show']);

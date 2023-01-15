@@ -11,6 +11,12 @@ class AbilitiesResolver
         if ($user->role == 'client') {
             return static::resolveForClient($device);
         }
+
+        if ($user->role == 'delivery') {
+            return static::resolveForDelivery($device);
+        }
+
+        return [];
     }
 
     public static function resolveForClient($device)
@@ -26,5 +32,12 @@ class AbilitiesResolver
                 'cart:manage',
             ],
         };
+    }
+
+    public static function resolveForDelivery($device)
+    {
+        return [
+            'availability:update',
+        ];
     }
 }
