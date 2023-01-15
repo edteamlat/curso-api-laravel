@@ -19,6 +19,8 @@ class UserResource extends JsonResource
             'email' => $this->email,
             'role' => $this->role,
             'availability' => $this->config['availability'],
+            'latitude' => $this->config['latitude'],
+            'longitude' => $this->config['longitude'],
         ];
     }
 }

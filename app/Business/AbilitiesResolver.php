@@ -38,6 +38,7 @@ class AbilitiesResolver
     {
         return [
             'availability:update',
+            'coordinates:update',
         ];
     }
 }
