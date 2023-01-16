@@ -18,4 +18,9 @@ class Order extends Model
     protected $casts = [
         'content' => 'json',
     ];
+
+    public function isPending()
+    {
+        return $this->status == 'pending';
+    }
 }
