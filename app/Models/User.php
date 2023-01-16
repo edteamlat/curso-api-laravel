@@ -42,4 +42,14 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
         'config' => 'json',
     ];
+
+    public function isClient()
+    {
+        return $this->role == 'client';
+    }
+
+    public function isDelivery()
+    {
+        return $this->role == 'delivery';
+    }
 }

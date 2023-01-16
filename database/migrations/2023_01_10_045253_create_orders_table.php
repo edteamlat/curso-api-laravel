@@ -17,6 +17,7 @@ return new class extends Migration
             $table->id();
             $table->foreignId('user_id');
             $table->json('content');
+            $table->string('status');
             $table->timestamps();
 
             $table->foreign('user_id')

@@ -12,6 +12,7 @@ class Order extends Model
     protected $fillable = [
         'user_id',
         'content',
+        'status',
     ];
 
     protected $casts = [

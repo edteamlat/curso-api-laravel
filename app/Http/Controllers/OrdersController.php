@@ -13,8 +13,12 @@ class OrdersController extends Controller
 {
     public function index()
     {
-        $orders = Order::where('user_id', Auth::id())
-            ->paginate(10);
+        $orders = Order::when(Auth::user()->isClient(), function ($query) {
+                $query->where('user_id', Auth::id());
+            })
+            ->when(Auth::user()->isDelivery(), function ($query) {
+                $query->where('status', 'pending');
+            })->paginate(10);
 
         return OrderResource::collection($orders);
     }
@@ -32,6 +36,7 @@ class OrdersController extends Controller
                 'qty' => $cartItem->qty,
                 'tax_rate' => $cartItem->taxRate,
                 'total' => $cartItem->total(),
+                'product_id' => $cartItem->options->product_id,
             ];
         })->values();
 
@@ -40,6 +45,7 @@ class OrdersController extends Controller
         $order = Order::create([
             'user_id' => Auth::id(),
             'content' => $content,
+            'status' => 'pending',
         ]);
 
         return new OrderResource($order);
