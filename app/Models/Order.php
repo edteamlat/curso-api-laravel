@@ -23,4 +23,9 @@ class Order extends Model
     {
         return $this->status == 'pending';
     }
+
+    public function deliveryUser()
+    {
+        return $this->belongsTo(User::class, 'delivery_user_id');
+    }
 }
