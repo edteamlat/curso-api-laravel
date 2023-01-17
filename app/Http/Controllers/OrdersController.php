@@ -13,6 +13,8 @@ class OrdersController extends Controller
 {
     public function index()
     {
+        abort_unless(Auth::user()->tokenCan('orders:show'), 403, "You don't have permissions to perform this action.");
+
         $orders = Order::when(Auth::user()->isClient(), function ($query) {
                 $query->where('user_id', Auth::id());
             })
